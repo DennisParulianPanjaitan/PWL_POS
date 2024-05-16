@@ -8,14 +8,25 @@ use App\Models\LevelModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class UserModel extends Authenticatable
+class UserModel extends Authenticatable implements JWTSubject
 {
     use HasFactory;
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
 
     protected $table = "m_user";
-    public $timestamps = false;
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = "user_id";
+    
     protected $fillable = [
         'user_id',
         'level_id',
@@ -23,9 +34,9 @@ class UserModel extends Authenticatable
         'nama',
         'password',
     ];
-
-    public function level(): BelongsTo
-    {
+    
+    public function level (){
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
     }
-}
+    }
+
