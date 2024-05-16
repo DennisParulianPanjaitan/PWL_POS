@@ -76,7 +76,8 @@ class UserController extends Controller
             'username' => 'required|string|min:3|unique:m_user,username',
             'nama' => 'required|string|max:100',
             'password' => 'required|min:5',
-            'level_id' => 'required|integer'
+            'level_id' => 'required|integer',
+            'image'    => 'required|image|mimesL:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         UserModel::create([
@@ -134,7 +135,8 @@ class UserController extends Controller
             'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
             'nama' => 'required|string|max:100',
             'password' => 'required|min:5',
-            'level_id' => 'required|integer'
+            'level_id' => 'required|integer',
+            'image'    => 'required|image|mimesL:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         UserModel::find($id)->update([

@@ -20,7 +20,8 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'PAN',
                 'barang_nama' => 'Panci',
                 'harga_beli' => 50000,
-                'harga_jual' => 100000
+                'harga_jual' => 100000,
+                'image' => ''
             ],
             [
                 'barang_id' => 2,
@@ -28,7 +29,8 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'SPAT',
                 'barang_nama' => 'Spatula',
                 'harga_beli' => 90000,
-                'harga_jual' => 120000
+                'harga_jual' => 120000,
+                'image' => ''
             ],
             [
                 'barang_id' => 3,
@@ -36,7 +38,9 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'KUL',
                 'barang_nama' => 'Kulkas',
                 'harga_beli' => 900000,
-                'harga_jual' => 1000000
+                'harga_jual' => 1000000,
+                'image' => ''
+
             ],
             [
                 'barang_id' => 4,
@@ -44,7 +48,9 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'ASU',
                 'barang_nama' => 'Asuwus',
                 'harga_beli' => 50000000,
-                'harga_jual' => 60000000
+                'harga_jual' => 60000000,
+                'image' => ''
+
             ],
             [
                 'barang_id' => 5,
@@ -52,7 +58,9 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'OPA',
                 'barang_nama' => 'Oppo Ae',
                 'harga_beli' => 5000000,
-                'harga_jual' => 10000000
+                'harga_jual' => 10000000,
+                'image' => ''
+
             ],
             [
                 'barang_id' => 6,
@@ -60,7 +68,9 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'BED',
                 'barang_nama' => 'Bedak',
                 'harga_beli' => 50000,
-                'harga_jual' => 65000
+                'harga_jual' => 65000,
+                'image' => ''
+
             ],
             [
                 'barang_id' => 7,
@@ -68,7 +78,9 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'OVN',
                 'barang_nama' => 'Oven',
                 'harga_beli' => 5000000,
-                'harga_jual' => 4500000
+                'harga_jual' => 4500000,
+                'image' => ''
+
             ],
             [
                 'barang_id' => 8,
@@ -76,7 +88,9 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'HPA',
                 'barang_nama' => 'HP a?',
                 'harga_beli' => 5000000,
-                'harga_jual' => 5500000
+                'harga_jual' => 5500000,
+                'image' => ''
+
             ],
             [
                 'barang_id' => 9,
@@ -84,7 +98,9 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'NSI',
                 'barang_nama' => 'NSI',
                 'harga_beli' => 10000000,
-                'harga_jual' => 12500000
+                'harga_jual' => 12500000,
+                'image' => ''
+
             ],
             [
                 'barang_id' => 10,
@@ -92,7 +108,9 @@ class BarangSeeder extends Seeder
                 'barang_kode' => 'KMPR',
                 'barang_nama' => 'Kompor',
                 'harga_beli' => 50000,
-                'harga_jual' => 100000
+                'harga_jual' => 100000,
+                'image' => ''
+
             ],
         ];
         DB::table('m_barang')->insert($data);

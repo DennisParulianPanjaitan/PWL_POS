@@ -20,6 +20,64 @@ class BarangController extends Controller
         ]);
     }
 
+    public function __invoke(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'kategori_id' => 'required|exists:m_kategori,kategori_id',
+            'barang_kode' => 'required|unique:m_barang',
+            'barang_nama' => 'required',
+            'harga_beli' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        global $barang;
+
+        // Check if file image is present in the request
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $hashedName = $image->hashName();
+            $path = $image->storeAs('barang', $hashedName);
+            $barang = m_barang::create([
+                'kategori_id' => $request->kategori_id,
+                'barang_kode' => $request->barang_kode,
+                'barang_nama' => $request->barang_nama,
+                'harga_beli' => $request->harga_beli,
+                'harga_jual' => $request->harga_jual,
+                'image' => $hashedName,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'errors' => 'No image file uploaded',
+            ], 422);
+        }
+
+        if ($barang) {
+            return response()->json([
+                'success' => true,
+                'status_code' => 201,
+                'barang' => [
+                    'kategori_id' => $request->kategori_id,
+                    'barang_kode' => $request->barang_kode,
+                    'barang_nama' => $request->barang_nama,
+                    'harga_beli' => $request->harga_beli,
+                    'harga_jual' => $request->harga_jual,
+                    'image' => 'localhost:8000/storage/' . $path,
+                ]
+            ], 201);
+        }
+
+        return response()->json([
+            'status_code' => 503,
+            'success' => false
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -28,26 +86,56 @@ class BarangController extends Controller
             'barang_nama' => 'required',
             'harga_beli' => 'required|numeric',
             'harga_jual' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status_code' => 400,
-                'errors' => $validator->errors()
-            ]);
+            return response()->json($validator->errors(), 422);
         }
 
-        $barang = m_barang::create($request->all());
+        // Check if file image is present in the request
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $hashedName = $image->hashName();
+            $path = $image->storeAs('barang', $hashedName);
+            $barang = m_barang::create([
+                'kategori_id' => $request->kategori_id,
+                'barang_kode' => $request->barang_kode,
+                'barang_nama' => $request->barang_nama,
+                'harga_beli' => $request->harga_beli,
+                'harga_jual' => $request->harga_jual,
+                'image' => $hashedName,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'errors' => 'No image file uploaded',
+            ], 422);
+        }
+
+        if ($barang) {
+            return response()->json([
+                'success' => true,
+                'status_code' => 201,
+                'barang' => [
+                    'kategori_id' => $request->kategori_id,
+                    'barang_kode' => $request->barang_kode,
+                    'barang_nama' => $request->barang_nama,
+                    'harga_beli' => $request->harga_beli,
+                    'harga_jual' => $request->harga_jual,
+                    'image' => 'localhost:8000/storage/' . $path,
+                ]
+            ], 201);
+        }
 
         return response()->json([
-            'status_code' => 201,
-            'data' => $barang
+            'status_code' => 503,
+            'success' => false
         ]);
     }
 
     public function show(m_barang $barang)
     {
-        return $barang;
         $barang->load('kategori', 'stok'); // Load relasi kategori dan stok
 
         return response()->json([
@@ -77,3 +165,5 @@ class BarangController extends Controller
         ]);
     }
 }
+
+
