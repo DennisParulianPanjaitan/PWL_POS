@@ -58,17 +58,18 @@ class FileUploadController extends Controller
         // }
         $request->validate([
             'berkas' => 'required|file|image|max:500',]);
-            $extfile=$request->berkas->getClientOriginalName();
-            $namaFile='web-'.time().".".$extfile;
 
-            $path = $request->berkas->move('gambar',$namaFile);
-            $path =str_replace('\\','//', $path);
-            echo"Variabel path berisi:$path <br>";
+            $namaGambar = $request->input('nama_gambar');
+            $file = $request->file('berkas');
 
+            if ($file) {
+                $extension = $file->getClientOriginalExtension();
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('uploads', $fileName, 'public');
+            }
 
-            $pathBaru=asset('gambar/'.$namaFile);
-            echo "proses upload berhasil, data disimpan pada:$path";
+            echo "Gambar berhasil di upload ke <a href='/storage/$filePath' target='_blank'>{$namaGambar}.{$extension}</a>";
             echo "<br>";
-            echo "Tampilkan link:<a href='$pathBaru'>$pathBaru</a>";
+            echo "<img src='/storage/$filePath' alt='{$namaGambar}' style='max-width: 300px; margin-top: 10px;'>";
         }
 }
