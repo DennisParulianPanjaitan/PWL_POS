@@ -39,6 +39,7 @@
                     <th>Nama Barang</th>
                     <th>Harga Beli</th>
                     <th>Harga Jual</th>
+                    <th>Image</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -93,11 +94,21 @@ $(document).ready(function() {
             orderable: false, //orderable true jika ingin kolom bisa diurutkan
             searchable: false //searchable true jika ingin kolom bisa dicari
         }, {
+                    data: "image",
+                    className: "",
+                    orderable: true,
+                    searchable: true,
+                    render: function(data, type, full, meta) {
+                        return data ? '<img src="/storage/barang/' + data + '" width="100px">' :
+                            '';
+                    }
+                },
+            {
             data: "aksi",
             classname: "",
             orderable: false, //orderable true jika ingin kolom bisa diurutkan
             searchable: false //searchable true jika ingin kolom bisa dicari
-        }]
+        }, ]
     });
     $('#kategori_id').on('change', function() {
         dataBarang.ajax.reload();

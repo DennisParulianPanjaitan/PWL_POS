@@ -13,7 +13,6 @@ class BarangController extends Controller
     public function index()
     {
         $barangs = m_barang::with('kategori', 'stok')->get();
-
         return response()->json([
             'status_code' => 200,
             'data' => $barangs

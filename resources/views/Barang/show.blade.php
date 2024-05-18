@@ -3,11 +3,11 @@
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
-            <h3 class="card-title">{{ $page->title }}</h3>
+            <h3 class="card-title">{{$page->title}}</h3>
             <div class="card-tools"></div>
         </div>
         <div class="card-body">
-            @empty($penjualan)
+            @empty($barang)
                 <div class="alert alert-danger alert-dismissible">
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
                     Data yang Anda cari tidak ditemukan.
@@ -16,58 +16,42 @@
                 <table class="table table-bordered table-striped table-hover table-sm">
                     <tr>
                         <th>ID</th>
-                        <td>{{ $penjualan->penjualan_id }}</td>
+                        <td>{{$barang->barang_id}}</td>
                     </tr>
                     <tr>
-                        <th>Kode</th>
-                        <td>{{ $penjualan->penjualan_kode }}</td>
+                        <th>Kode Barang</th>
+                        <td>{{$barang->barang_kode}}</td>
                     </tr>
                     <tr>
-                        <th>Pembeli</th>
-                        <td>{{ $penjualan->pembeli }}</td>
+                        <th>Kategori</th>
+                        <td>{{$barang->kategori->kategori_nama}}</td>
                     </tr>
                     <tr>
-                        <th>Tanggal</th>
-                        <td>{{ $penjualan->penjualan_tanggal }}</td>
+                        <th>Nama</th>
+                        <td>{{$barang->barang_nama}}</td>
                     </tr>
                     <tr>
-                        <th>Petugas</th>
-                        <td>{{ $penjualan->user->nama }}</td>
+                        <th>Harga Beli</th>
+                        <td>{{$barang->harga_beli}}</td>
                     </tr>
-                </table>
-                <br><br><br>
-                {{-- <h4 class="font-weight-bold text-uppercase mb-4">Detail Penjualan</h4> --}}
-                <table class="table table-bordered table-striped table-hover table-sm">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Barang</th>
-                            <th>image</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($penjualanDetail as $detail)
-                            <tr>
-                                <td>{{ $detail->detail_id }}</td>
-                                <td>{{ $detail->barang->barang_nama }}</td>
-                                <td><img src="/storage/barang/{{ $detail->barang->image }}" alt="barang-image"
-                                        style="width: 200px; border-radius: 5px;">
-                                </td>
-                                <td>{{ $detail->harga }}</td>
-                                <td>{{ $detail->jumlah }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+                    <tr>
+                        <th>Harga Jual</th>
+                        <td>{{$barang->harga_jual}}</td>
+                    </tr>
+                    <tr>
+                        <th>Gambar</th>
+                        <td><img src="{{ asset('storage/barang/' . $barang->image) }}" alt="{{ $barang->barang_nama }}" style="max-width: 200px;"></td>
+                    </tr>
                 </table>
             @endempty
-            <a href="{{ url('penjualan') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+            <a href="{{url('barang')}}" class="btn btn-sm btn-default mt-2">Kembali</a>
         </div>
     </div>
 @endsection
 
 @push('css')
+
 @endpush
 @push('js')
+
 @endpush
